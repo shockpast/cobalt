@@ -1,0 +1,6 @@
+{
+  "tasks": {
+    "bot:dev": "deno run --watch -A main.ts",
+    "bot:run": "deno run -A main.ts"
+  }
+}

@@ -1,0 +1,23 @@
+export const services = [
+  "BiliBili",
+  "BlueSky",
+  "DailyMotion",
+  "Facebook",
+  "Instagram <a href='https://i.imgur.com/1ozAQnY.png'>(?)</a>",
+  "Loom",
+  "OK",
+  "Pinterest",
+  "Reddit",
+  "RuTube",
+  "SnapChat",
+  "SoundCloud",
+  "Streamable",
+  "TikTok <a href='https://i.imgur.com/uJKpnwP.png'>(?)</a>",
+  "Tumblr",
+  "Twitch",
+  "Twitter",
+  "Vine",
+  "Vimeo",
+  "VK",
+  "YouTube <a href='https://i.imgur.com/8VSfaEu.png'>(?)</a>"
+]
