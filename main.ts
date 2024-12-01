@@ -4,11 +4,12 @@ import "jsr:@std/dotenv/load" // load .env
 
 import { message } from "npm:telegraf/filters"
 import { Input, Telegraf, TelegramError } from "npm:telegraf"
-import type { InputFile } from "npm:telegraf/types"
+import type { InputMediaAudio, InputMediaPhoto, InputMediaVideo } from "npm:telegraf/types"
 
 import i18n from "./i18n.ts"
 import { getFiles } from "./main_utils.ts"
 import { services } from "./main_data.ts"
+import { randomUUID } from "node:crypto";
 
 ///
 
@@ -45,14 +46,14 @@ bot.on(message("text"), async (ctx) => {
   if (error)
     return await ctx.reply(`${t(error.code)}\n\n<span class="tg-spoiler">🙀 ${error.code}</span>`, { reply_parameters: { message_id: ctx.message.message_id }, parse_mode: "HTML", link_preview_options: { is_disabled: true } })
 
-  const mediaGroup: { type: "photo" | "audio" | "video", media: string | InputFile }[] = []
+  const mediaGroup: (InputMediaPhoto | InputMediaAudio | InputMediaVideo)[] = []
 
   files.filter(url => url.match(/(jpg|jpeg|png|webp|svg)/gi))
     .map((file) => mediaGroup.push({ type: "photo", media: file }))
   files.filter((url, index) => url.match(/(mp4|webm|mkv)/gi) || (url.includes("/tunnel?id=") && (source[index] && !source[index].includes("soundcloud") && !source[index].includes("audio:"))))
-    .map((file) => mediaGroup.push({ type: "video", media: Input.fromURLStream(file) }))
+    .map((file) => mediaGroup.push({ type: "video", media: Input.fromURLStream(file, randomUUID().replaceAll("-", "").slice(0, 11)) }))
   files.filter((url, index) => url.match(/(mp3|ogg|wav)/gi) || (source[index] && source[index].includes("soundcloud") || source[index].includes("audio:")))
-    .map((file) => mediaGroup.push({ type: "audio", media: Input.fromURLStream(file) }))
+    .map((file) => mediaGroup.push({ type: "audio", media: Input.fromURLStream(file, randomUUID().replaceAll("-", "").slice(0, 11)) }))
 
   if (mediaGroup.length < 1) return
 
