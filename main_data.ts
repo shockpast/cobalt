@@ -3,7 +3,7 @@ export const services = [
   "BlueSky",
   "DailyMotion",
   "Facebook",
-  "Instagram <a href='https://i.imgur.com/1ozAQnY.png'>(?)</a>",
+  "Instagram",
   "Loom",
   "OK",
   "Pinterest",

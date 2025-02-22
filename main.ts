@@ -1,4 +1,5 @@
 import process from "node:process"
+import { randomUUID } from "node:crypto"
 
 import "jsr:@std/dotenv/load" // load .env
 
@@ -9,7 +10,6 @@ import type { InputMediaAudio, InputMediaPhoto, InputMediaVideo } from "npm:tele
 import i18n from "./i18n.ts"
 import { getFiles } from "./main_utils.ts"
 import { services } from "./main_data.ts"
-import { randomUUID } from "node:crypto";
 
 ///
 
@@ -35,10 +35,16 @@ bot.hears(/\/(services)/, async (ctx) => {
   return await ctx.reply(services.join(", "), { parse_mode: "HTML", link_preview_options: { is_disabled: true } })
 })
 
+bot.hears(/\/(donate)/, async (ctx) => {
+  const t = i18n(ctx.message.from.language_code)
+
+  return await ctx.reply(t("bot.donate"), { parse_mode: "HTML", link_preview_options: { is_disabled: true } })
+})
+
 bot.on(message("text"), async (ctx) => {
   const t = i18n(ctx.message.from.language_code)
 
-  ///
+  //
   const urls = ctx.message.text.matchAll(URL_REGEX)
   if (urls == null) return
 
@@ -57,6 +63,7 @@ bot.on(message("text"), async (ctx) => {
 
   if (mediaGroup.length < 1) return
 
+  // @ts-ignore: deno-ts(2345)
   ctx.replyWithMediaGroup(mediaGroup, { reply_parameters: { message_id: ctx.message.message_id } })
     .catch(async (err: TelegramError) => {
       const createMessage = (message: string, code: string) => `${message}\n\n<span class="tg-spoiler">🙀 ${code}</span>`

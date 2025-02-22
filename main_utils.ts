@@ -2,7 +2,8 @@ import type { APIRequest, APIResponse } from "./types/v10.ts"
 import type { FunctionResult } from "./types/other.ts"
 
 const httpClient = Deno.createHttpClient({
-  poolMaxIdlePerHost: 0
+  poolMaxIdlePerHost: 0,
+  poolIdleTimeout: 5
 })
 
 export async function getFiles(urls: IterableIterator<RegExpMatchArray>): Promise<FunctionResult> {
@@ -15,7 +16,7 @@ export async function getFiles(urls: IterableIterator<RegExpMatchArray>): Promis
 
     source.push(capture)
 
-    const response = await fetch("https://cobalt.curly.team/", {
+    const response = await fetch(Deno.env.get("API_URL")!, {
       method: "POST",
       headers: {
         "Accept": "application/json",
@@ -31,11 +32,12 @@ export async function getFiles(urls: IterableIterator<RegExpMatchArray>): Promis
       client: httpClient
     })
 
+    if (response.status != 200)
+      return { files: [], source: source }
+
     const json: APIResponse = await response.json()
-    if (json.status == "error") {
-      console.log(`${source} - ${json.error.code}`)
+    if (json.status == "error")
       return { files: [], source: source, error: json.error }
-    }
 
     switch (json.status) {
       case "picker":
