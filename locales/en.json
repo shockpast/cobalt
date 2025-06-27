@@ -1,0 +1,57 @@
+{
+  "bot": {
+    "start": "<b>cobalt.tools</b> is the newest and probably the fastest way to download videos, photos, and much more from the internet.\n\nI am not an official addition to their website; this was created by an enthusiast so you won't have to open the website over and over again. This bot will also help you share memes, videos, and other \"important\" things with your friends!\n\nGetting started with this bot is very easy: just send your links in the chat, and it will quickly respond with the video <b>WITHOUT</b> any issues like paywalls, registration requirements, and other unnecessary things.\n\n<a href='https://t.me/shckpst'><i>the cat creature that created me</i></a> / <a href='https://t.me/shobolt'><i>bot news & updates</i></a>",
+
+    "settings": {
+      "accept_only_messages": "download from messages",
+      "accept_only_commands": "download from commands",
+      "default_quality": "change default quality"
+    },
+
+    "errors": {
+      "permissions": {
+        "insufficient": "You don't have permissions to use this command, it's available only to administrators."
+      }
+    }
+  },
+
+  "messages": {
+    "settings": {
+      "info": "You can ",
+      "quality_options": "You can choose one of these video qualities: `1080`, `720` and `480`",
+      "quality_invalid": "{quality} is invalid, supported are: `1080`, `720` and `480`",
+      "updated_settings": "Done!"
+    }
+  },
+
+  "error": {
+    "api": {
+      "link": {
+        "unsupported": "Purr-purr, it seems this link isn't supported! Please check it — maybe it wandered off somewhere?",
+        "invalid": "Oops, the link is invalid or the service is not supported yet. Please check that you pasted the correct link."
+      },
+      "fetch": {
+        "critical": "Oops, an unknown error occurred. Try again in a few seconds. If the issue persists, let us know, and we'll look into it!",
+        "fail": "Oops, something went wrong while fetching the information. Please check that the link works. If it does and the error persists, let us know, and we’ll try to help!",
+        "empty": "Couldn't find any media to download. Please check that the link is correct and try again!"
+      },
+      "youtube": {
+        "api_error": "Oops, an error occurred while fetching the video information. Please check that the link is correct and try again!\n\nWe are aware of this issue and are were told about that, check out our post about this in <a href='https://t.me/shobolt/2'>our channel.</a>",
+        "login": "Oops, it seems YouTube is currently unavailable in the bot, please try again later.\n\nWe will inform you when this error is fixed on <a href='https://t.me/shobolt'>our channel</a>"
+      },
+      "content": {
+        "post": {
+          "age": "Oops, the content you're trying to download is age-restricted!"
+        }
+      },
+
+      "invalid_body": "Oops, the response from the server is invalid. Please try again later!"
+    },
+
+    "telegram": {
+      "send": {
+        "mixed": "Cannot send audio mixed with other media types. Please try sending it separately!"
+      }
+    }
+  }
+}

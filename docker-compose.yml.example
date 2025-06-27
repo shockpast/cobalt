@@ -1,0 +1,11 @@
+services:
+  bot:
+    restart: unless-stopped
+    build: .
+    environment:
+      - BOT_TOKEN=
+      - COBALT_BASE=
+      - COBALT_TOKEN=
+      - COBALT_USER_AGENT=
+    volumes:
+      - ./cobalt.db:/app/cobalt.db
